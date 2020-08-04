@@ -14,6 +14,8 @@
     "fetch": "rimraf ./static/assets/ && mkdirp ./static/assets/ && node ./scripts/fetchMediaLibraryAssets.js",
     "dist": "npm run build-gui && npm run fetch && npm run compile -p && node ./scripts/electron-builder-wrapper.js",
     "dist:dir": "npm run dist -- --dir -c.compression=store -c.mac.identity=null",
+    "pbjs": "pbjs -t json -p ./src/compiler/protobuf-msg/commands board.proto commands.proto common.proto compile.proto core.proto lib.proto upload.proto > ./src/compiler/rpc/commands.json",
+    "grpc": "node ./src/compiler/rpc/rpc.js",
     "lint": "eslint --cache --color --ext .jsx,.js ."
   },
   "repository": {
@@ -21,6 +23,8 @@
     "url": "git+ssh://git@github.com/LLK/scratch-desktop.git"
   },
   "dependencies": {
+    "grpc": "^1.24.3",
+    "protobufjs": "^6.10.1",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
@@ -50,14 +54,15 @@
     "lodash.defaultsdeep": "^4.6.1",
     "minilog": "^3.1.0",
     "mkdirp": "^1.0.4",
+    "monaco-editor-webpack-plugin": "^1.9.0",
     "nets": "^3.2.0",
     "react": "16.2.0",
     "react-dom": "16.2.1",
     "react-intl": "2.8.0",
+    "react-monaco-editor": "^0.39.1",
     "react-redux": "5.0.7",
     "redux": "3.5.2",
     "rimraf": "^3.0.2",
-    "scratch-gui": "github:LLK/scratch-gui#scratch-desktop-v3.10.2",
     "source-map-loader": "^0.2.4",
     "uuid": "^8.0.0",
     "webpack": "^4.43.0"

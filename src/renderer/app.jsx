@@ -9,6 +9,10 @@ import ElectronStorageHelper from '../common/ElectronStorageHelper';
 
 import styles from './app.css';
 
+import "react-monaco-editor";
+
+const arduinoCompiler = require('electron').remote.app.arduinoCompiler;
+
 const defaultProjectId = 0;
 
 // override window.open so that it uses the OS's default browser, not an electron browser
@@ -83,6 +87,7 @@ const ScratchDesktopHOC = function (WrappedComponent) {
                 onTelemetryModalOptIn={this.handleTelemetryModalOptIn}
                 onTelemetryModalOptOut={this.handleTelemetryModalOptOut}
                 onUpdateProjectTitle={this.handleUpdateProjectTitle}
+                compiler = {arduinoCompiler}
                 {...this.props}
             />);
         }

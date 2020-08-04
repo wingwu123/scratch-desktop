@@ -7,9 +7,12 @@ import {getFilterForExtension} from './FileFilters';
 import telemetry from './ScratchDesktopTelemetry';
 import MacOSMenu from './MacOSMenu';
 import log from '../common/log.js';
+import arduinoCompiler from './arduinoCompiler';
 
 // suppress deprecation warning; this will be the default in Electron 9
 app.allowRendererProcessReuse = true;
+
+app.arduinoCompiler = arduinoCompiler;
 
 telemetry.appWasOpened();
 

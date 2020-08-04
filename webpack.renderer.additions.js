@@ -1,6 +1,7 @@
 const path = require('path');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 const makeConfig = require('./webpack.makeConfig.js');
 
@@ -14,6 +15,9 @@ module.exports = makeConfig({
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, 'node_modules', 'scratch-gui', 'dist', 'static'),
             to: 'static'
-        }])
+        }]),
+        new MonacoWebpackPlugin({
+            languages: ["typescript", "javascript", "css","cpp"],
+        })
     ]
 });

@@ -1,0 +1,1244 @@
+{
+  "nested": {
+    "cc": {
+      "nested": {
+        "arduino": {
+          "nested": {
+            "cli": {
+              "nested": {
+                "commands": {
+                  "options": {
+                    "go_package": "github.com/arduino/arduino-cli/rpc/commands"
+                  },
+                  "nested": {
+                    "BoardDetailsReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "fqbn": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoardDetailsResp": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "configOptions": {
+                          "rule": "repeated",
+                          "type": "ConfigOption",
+                          "id": 3
+                        },
+                        "requiredTools": {
+                          "rule": "repeated",
+                          "type": "RequiredTool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ConfigOption": {
+                      "fields": {
+                        "option": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "optionLabel": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "ConfigValue",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ConfigValue": {
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "valueLabel": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "selected": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RequiredTool": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "packager": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "BoardAttachReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "boardUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sketchPath": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "searchTimeout": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "BoardAttachResp": {
+                      "fields": {
+                        "taskProgress": {
+                          "type": "TaskProgress",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BoardListReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BoardListResp": {
+                      "fields": {
+                        "ports": {
+                          "rule": "repeated",
+                          "type": "DetectedPort",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DetectedPort": {
+                      "fields": {
+                        "address": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "protocolLabel": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "boards": {
+                          "rule": "repeated",
+                          "type": "BoardListItem",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "BoardListAllReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "searchArgs": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoardListAllResp": {
+                      "fields": {
+                        "boards": {
+                          "rule": "repeated",
+                          "type": "BoardListItem",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BoardListItem": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "FQBN": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ArduinoCore": {
+                      "methods": {
+                        "Init": {
+                          "requestType": "InitReq",
+                          "responseType": "InitResp",
+                          "responseStream": true
+                        },
+                        "Destroy": {
+                          "requestType": "DestroyReq",
+                          "responseType": "DestroyResp"
+                        },
+                        "Rescan": {
+                          "requestType": "RescanReq",
+                          "responseType": "RescanResp"
+                        },
+                        "UpdateIndex": {
+                          "requestType": "UpdateIndexReq",
+                          "responseType": "UpdateIndexResp",
+                          "responseStream": true
+                        },
+                        "UpdateLibrariesIndex": {
+                          "requestType": "UpdateLibrariesIndexReq",
+                          "responseType": "UpdateLibrariesIndexResp",
+                          "responseStream": true
+                        },
+                        "Version": {
+                          "requestType": "VersionReq",
+                          "responseType": "VersionResp"
+                        },
+                        "BoardDetails": {
+                          "requestType": "BoardDetailsReq",
+                          "responseType": "BoardDetailsResp"
+                        },
+                        "BoardAttach": {
+                          "requestType": "BoardAttachReq",
+                          "responseType": "BoardAttachResp",
+                          "responseStream": true
+                        },
+                        "BoardList": {
+                          "requestType": "BoardListReq",
+                          "responseType": "BoardListResp"
+                        },
+                        "BoardListAll": {
+                          "requestType": "BoardListAllReq",
+                          "responseType": "BoardListAllResp"
+                        },
+                        "Compile": {
+                          "requestType": "CompileReq",
+                          "responseType": "CompileResp",
+                          "responseStream": true
+                        },
+                        "PlatformInstall": {
+                          "requestType": "PlatformInstallReq",
+                          "responseType": "PlatformInstallResp",
+                          "responseStream": true
+                        },
+                        "PlatformDownload": {
+                          "requestType": "PlatformDownloadReq",
+                          "responseType": "PlatformDownloadResp",
+                          "responseStream": true
+                        },
+                        "PlatformUninstall": {
+                          "requestType": "PlatformUninstallReq",
+                          "responseType": "PlatformUninstallResp",
+                          "responseStream": true
+                        },
+                        "PlatformUpgrade": {
+                          "requestType": "PlatformUpgradeReq",
+                          "responseType": "PlatformUpgradeResp",
+                          "responseStream": true
+                        },
+                        "Upload": {
+                          "requestType": "UploadReq",
+                          "responseType": "UploadResp",
+                          "responseStream": true
+                        },
+                        "PlatformSearch": {
+                          "requestType": "PlatformSearchReq",
+                          "responseType": "PlatformSearchResp"
+                        },
+                        "PlatformList": {
+                          "requestType": "PlatformListReq",
+                          "responseType": "PlatformListResp"
+                        },
+                        "LibraryDownload": {
+                          "requestType": "LibraryDownloadReq",
+                          "responseType": "LibraryDownloadResp",
+                          "responseStream": true
+                        },
+                        "LibraryInstall": {
+                          "requestType": "LibraryInstallReq",
+                          "responseType": "LibraryInstallResp",
+                          "responseStream": true
+                        },
+                        "LibraryUninstall": {
+                          "requestType": "LibraryUninstallReq",
+                          "responseType": "LibraryUninstallResp",
+                          "responseStream": true
+                        },
+                        "LibraryUpgradeAll": {
+                          "requestType": "LibraryUpgradeAllReq",
+                          "responseType": "LibraryUpgradeAllResp",
+                          "responseStream": true
+                        },
+                        "LibraryResolveDependencies": {
+                          "requestType": "LibraryResolveDependenciesReq",
+                          "responseType": "LibraryResolveDependenciesResp"
+                        },
+                        "LibrarySearch": {
+                          "requestType": "LibrarySearchReq",
+                          "responseType": "LibrarySearchResp"
+                        },
+                        "LibraryList": {
+                          "requestType": "LibraryListReq",
+                          "responseType": "LibraryListResp"
+                        }
+                      }
+                    },
+                    "InitReq": {
+                      "fields": {
+                        "libraryManagerOnly": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "InitResp": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "platformsIndexErrors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "librariesIndexError": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "downloadProgress": {
+                          "type": "DownloadProgress",
+                          "id": 4
+                        },
+                        "taskProgress": {
+                          "type": "TaskProgress",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "DestroyReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DestroyResp": {
+                      "fields": {}
+                    },
+                    "RescanReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RescanResp": {
+                      "fields": {
+                        "platformsIndexErrors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "librariesIndexError": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateIndexReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateIndexResp": {
+                      "fields": {
+                        "downloadProgress": {
+                          "type": "DownloadProgress",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateLibrariesIndexReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateLibrariesIndexResp": {
+                      "fields": {
+                        "downloadProgress": {
+                          "type": "DownloadProgress",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VersionReq": {
+                      "fields": {}
+                    },
+                    "VersionResp": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Instance": {
+                      "fields": {
+                        "id": {
+                          "type": "int32",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DownloadProgress": {
+                      "fields": {
+                        "url": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "file": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "downloaded": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "completed": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "TaskProgress": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "completed": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CompileReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "fqbn": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sketchPath": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "showProperties": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "preprocess": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "buildCachePath": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "buildPath": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "buildProperties": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "warnings": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "verbose": {
+                          "type": "bool",
+                          "id": 10
+                        },
+                        "quiet": {
+                          "type": "bool",
+                          "id": 11
+                        },
+                        "vidPid": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "exportFile": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "jobs": {
+                          "type": "int32",
+                          "id": 14
+                        },
+                        "libraries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 15
+                        },
+                        "optimizeForDebug": {
+                          "type": "bool",
+                          "id": 16
+                        },
+                        "dryRun": {
+                          "type": "bool",
+                          "id": 17
+                        }
+                      }
+                    },
+                    "CompileResp": {
+                      "fields": {
+                        "outStream": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "errStream": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PlatformInstallReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "platformPackage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "architecture": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PlatformInstallResp": {
+                      "fields": {
+                        "progress": {
+                          "type": "DownloadProgress",
+                          "id": 1
+                        },
+                        "taskProgress": {
+                          "type": "TaskProgress",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PlatformDownloadReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "platformPackage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "architecture": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PlatformDownloadResp": {
+                      "fields": {
+                        "progress": {
+                          "type": "DownloadProgress",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PlatformUninstallReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "platformPackage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "architecture": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PlatformUninstallResp": {
+                      "fields": {
+                        "taskProgress": {
+                          "type": "TaskProgress",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PlatformUpgradeReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "platformPackage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "architecture": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PlatformUpgradeResp": {
+                      "fields": {
+                        "progress": {
+                          "type": "DownloadProgress",
+                          "id": 1
+                        },
+                        "taskProgress": {
+                          "type": "TaskProgress",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PlatformSearchReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "searchArgs": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "allVersions": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PlatformSearchResp": {
+                      "fields": {
+                        "searchOutput": {
+                          "rule": "repeated",
+                          "type": "Platform",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PlatformListReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "updatableOnly": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PlatformListResp": {
+                      "fields": {
+                        "installedPlatform": {
+                          "rule": "repeated",
+                          "type": "Platform",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Platform": {
+                      "fields": {
+                        "ID": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "Installed": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "Latest": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "Name": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "Maintainer": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "Website": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "Email": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "Boards": {
+                          "rule": "repeated",
+                          "type": "Board",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "Board": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fqbn": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LibraryDownloadReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LibraryDownloadResp": {
+                      "fields": {
+                        "progress": {
+                          "type": "DownloadProgress",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LibraryInstallReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LibraryInstallResp": {
+                      "fields": {
+                        "progress": {
+                          "type": "DownloadProgress",
+                          "id": 1
+                        },
+                        "taskProgress": {
+                          "type": "TaskProgress",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LibraryUninstallReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LibraryUninstallResp": {
+                      "fields": {
+                        "taskProgress": {
+                          "type": "TaskProgress",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LibraryUpgradeAllReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LibraryUpgradeAllResp": {
+                      "fields": {
+                        "progress": {
+                          "type": "DownloadProgress",
+                          "id": 1
+                        },
+                        "taskProgress": {
+                          "type": "TaskProgress",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LibraryResolveDependenciesReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LibraryResolveDependenciesResp": {
+                      "fields": {
+                        "dependencies": {
+                          "rule": "repeated",
+                          "type": "LibraryDependencyStatus",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LibraryDependencyStatus": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "versionRequired": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "versionInstalled": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LibrarySearchReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LibrarySearchStatus": {
+                      "values": {
+                        "failed": 0,
+                        "success": 1
+                      }
+                    },
+                    "LibrarySearchResp": {
+                      "fields": {
+                        "libraries": {
+                          "rule": "repeated",
+                          "type": "SearchedLibrary",
+                          "id": 1
+                        },
+                        "status": {
+                          "type": "LibrarySearchStatus",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchedLibrary": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "releases": {
+                          "keyType": "string",
+                          "type": "LibraryRelease",
+                          "id": 2
+                        },
+                        "latest": {
+                          "type": "LibraryRelease",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LibraryRelease": {
+                      "fields": {
+                        "author": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "maintainer": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "sentence": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "paragraph": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "website": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "architectures": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "types": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "resources": {
+                          "type": "DownloadResource",
+                          "id": 10
+                        },
+                        "license": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "providesIncludes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12
+                        },
+                        "dependencies": {
+                          "rule": "repeated",
+                          "type": "LibraryDependency",
+                          "id": 13
+                        }
+                      }
+                    },
+                    "LibraryDependency": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "versionConstraint": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DownloadResource": {
+                      "fields": {
+                        "url": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "archivefilename": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "checksum": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "size": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "cachepath": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "LibraryListReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "all": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "updatable": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LibraryListResp": {
+                      "fields": {
+                        "installedLibrary": {
+                          "rule": "repeated",
+                          "type": "InstalledLibrary",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "InstalledLibrary": {
+                      "fields": {
+                        "library": {
+                          "type": "Library",
+                          "id": 1
+                        },
+                        "release": {
+                          "type": "LibraryRelease",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Library": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "author": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "maintainer": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "sentence": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "paragraph": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "website": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "architectures": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "types": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "installDir": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "sourceDir": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "utilityDir": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "containerPlatform": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "realName": {
+                          "type": "string",
+                          "id": 16
+                        },
+                        "dotALinkage": {
+                          "type": "bool",
+                          "id": 17
+                        },
+                        "precompiled": {
+                          "type": "bool",
+                          "id": 18
+                        },
+                        "ldFlags": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "isLegacy": {
+                          "type": "bool",
+                          "id": 20
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 21
+                        },
+                        "license": {
+                          "type": "string",
+                          "id": 22
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 23
+                        },
+                        "location": {
+                          "type": "LibraryLocation",
+                          "id": 24
+                        },
+                        "layout": {
+                          "type": "LibraryLayout",
+                          "id": 25
+                        }
+                      }
+                    },
+                    "LibraryLayout": {
+                      "values": {
+                        "flat_layout": 0,
+                        "recursive_layout": 1
+                      }
+                    },
+                    "LibraryLocation": {
+                      "values": {
+                        "ide_builtin": 0,
+                        "user": 1,
+                        "platform_builtin": 2,
+                        "referenced_platform_builtin": 3
+                      }
+                    },
+                    "UploadReq": {
+                      "fields": {
+                        "instance": {
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "fqbn": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sketchPath": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "port": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "verbose": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "verify": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "importFile": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "UploadResp": {
+                      "fields": {
+                        "outStream": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "errStream": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
