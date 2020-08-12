@@ -16,6 +16,9 @@ npm-*
 # Build
 /build
 /dist
+/dist - 副本
+/outputs
+/extraFiles/Arduino
 /.opt-in
 /*.provisionprofile
 

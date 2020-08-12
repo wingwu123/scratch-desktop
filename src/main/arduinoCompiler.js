@@ -4,6 +4,7 @@ import path from 'path'
 import { app } from 'electron'
 import child_process from 'child_process';
 import { stderr } from 'process';
+import log from '../common/log'
 
 /**
  * 
@@ -42,13 +43,15 @@ class ArduinoCompiler{
     constructor(){
 
         this.appPath = app.getAppPath();
-        this.appPath = 'G:/projects/scratch30/arduino/Arduino/Arduino';
+        log.log('getAppPath ', this.appPath);
+        this.appPath = path.dirname(path.dirname(this.appPath));
+        log.log('getAppPath new ', this.appPath);
         this.port = '';
-        this.libraries = path.resolve(this.appPath, 'libraries/');
+        this.libraries = path.resolve(this.appPath, 'Arduino/libraries/');
 
-        this.compiler_path = path.resolve(this.appPath, 'arduino-cli.exe');
+        this.compiler_path = path.resolve(this.appPath, 'Arduino/arduino-cli.exe');
 
-        console.log('compiler_path ', this.compiler_path);
+        log.log('compiler_path ', this.compiler_path);
     }
 
     connect(){
@@ -84,7 +87,7 @@ class ArduinoCompiler{
 
     saveCode(code){
         return new Promise((resolve, reject) => {
-            fs.writeFile(path.resolve(this.appPath, 'libraries/WhalesbotApp/WhalesbotApp.ino'), code, (err) => {
+            fs.writeFile(path.resolve(this.libraries, 'WhalesbotApp/WhalesbotApp.ino'), code, (err) => {
                 if(err)
                 {
                     reject(err);
@@ -99,7 +102,7 @@ class ArduinoCompiler{
 
     compile(){
         return new Promise((resolve, reject) => {
-            let sketch_path = path.resolve(this.appPath, 'libraries/WhalesbotApp');
+            let sketch_path = path.resolve(this.libraries, 'WhalesbotApp');
             child_process.execFile(this.compiler_path, ['compile', '-b', 'arduino:avr:mega','--format','json','--libraries', this.libraries, sketch_path], (err, stdout, stderr) => {
                 if(!err){
                     if(stderr){
@@ -118,7 +121,7 @@ class ArduinoCompiler{
 
     upload(){
         return new Promise((resolve, reject) => {
-            let sketch_path = path.resolve(this.appPath, 'libraries/WhalesbotApp');
+            let sketch_path = path.resolve(this.libraries, 'WhalesbotApp');
             child_process.execFile(this.compiler_path, ['upload', '-b', 'arduino:avr:mega','--format','json','-p',this.port, sketch_path], (err, stdout, stderr) => {
                 if(!err){
                     if(stderr){

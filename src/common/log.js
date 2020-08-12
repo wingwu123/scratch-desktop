@@ -1,5 +1,7 @@
 import minilog from 'minilog';
+import fs from 'fs';
 minilog.enable();
+minilog.pipe(fs.createWriteStream('./scratch-log.log', { flags: 'a' }));
 
 const namespace = (() => {
     switch (process.type) {

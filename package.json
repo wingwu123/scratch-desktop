@@ -1,9 +1,9 @@
 {
   "name": "scratch-desktop",
-  "productName": "Scratch Desktop",
-  "description": "Scratch 3.0 as a self-contained desktop application",
+  "productName": "WOBOT Scratch",
+  "description": "WOBOT from whalebot company",
   "author": "Scratch Foundation",
-  "version": "3.10.4",
+  "version": "1.0.0",
   "license": "BSD-3-Clause",
   "scripts": {
     "start": "electron-webpack dev --bail --display-error-details --env.minify=false",
@@ -12,10 +12,12 @@
     "clean": "rimraf ./dist/ ./static/assets/",
     "compile": "rimraf ./dist/ && electron-webpack --bail --display-error-details --env.minify=false",
     "fetch": "rimraf ./static/assets/ && mkdirp ./static/assets/ && node ./scripts/fetchMediaLibraryAssets.js",
+    "build": "node ./scripts/electron-builder-wrapper.js",
     "dist": "npm run build-gui && npm run fetch && npm run compile -p && node ./scripts/electron-builder-wrapper.js",
+    "dist-nsis": "npm run dist -- -w nsis",
     "dist:dir": "npm run dist -- --dir -c.compression=store -c.mac.identity=null",
     "pbjs": "pbjs -t json -p ./src/compiler/protobuf-msg/commands board.proto commands.proto common.proto compile.proto core.proto lib.proto upload.proto > ./src/compiler/rpc/commands.json",
-    "grpc": "node ./src/compiler/rpc/rpc.js",
+    "cp-arduino": "xcopy .\\Arduino .\\dist\\win-ia32-unpacked\\Arduino\\ /S /E /Y /Q",
     "lint": "eslint --cache --color --ext .jsx,.js ."
   },
   "repository": {
@@ -23,8 +25,6 @@
     "url": "git+ssh://git@github.com/LLK/scratch-desktop.git"
   },
   "dependencies": {
-    "grpc": "^1.24.3",
-    "protobufjs": "^6.10.1",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
@@ -38,6 +38,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-react-intl": "^7.5.7",
+    "copy-dir-cli": "0.0.3",
     "copy-webpack-plugin": "^5.1.1",
     "electron": "^8.2.5",
     "electron-builder": "^22.6.0",

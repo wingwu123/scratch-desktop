@@ -1,9 +1,19 @@
 directories:
   buildResources: buildResources
   output: dist
-appId: edu.mit.scratch.scratch-desktop
-productName: "Scratch Desktop"
+appId: com.whalesbot.scratch.wobot
+productName: "WOBOT Scratch"
+copyright: Copyright © 2021 Whalesbot
 afterSign: "scripts/afterSign.js"
+extraFiles:
+  -
+    from : './extraFiles/Arduino/'
+    to : './Arduino/'
+    filter : 
+      - "**/*"
+  -
+    from : './extraFiles/d3dcompiler_47.dll'
+    to : './d3dcompiler_47.dll'
 mac:
   category: public.app-category.education
   entitlements: buildResources/entitlements.mac.plist
@@ -34,9 +44,14 @@ win:
   target:
     - appx
     - nsis
+  publisherName: whalesbot
+  signAndEditExecutable: false
+  requestedExecutionLevel: "requireAdministrator"
 appx:
   identityName: ScratchFoundation.ScratchDesktop
   publisherDisplayName: "Scratch Foundation"
   publisher: "CN=2EC43DF1-469A-4119-9AB9-568A0A1FF65F"
 nsis:
   oneClick: false # allow user to choose per-user or per-machine
+  allowToChangeInstallationDirectory: true
+  include: "./build/installer.nsh"

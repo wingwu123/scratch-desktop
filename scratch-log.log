@@ -1,0 +1,6 @@
+app-main debug getAppPath  G:\projects\scratch30\scratch-desktop\dist\main
+app-main debug getAppPath new  G:\projects\scratch30\scratch-desktop
+app-main debug compiler_path  G:\projects\scratch30\scratch-desktop\Arduino\arduino-cli.exe
+app-main debug getAppPath  G:\projects\scratch30\scratch-desktop\dist\main
+app-main debug getAppPath new  G:\projects\scratch30\scratch-desktop
+app-main debug compiler_path  G:\projects\scratch30\scratch-desktop\Arduino\arduino-cli.exe

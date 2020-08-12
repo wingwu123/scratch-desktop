@@ -1,4 +1,4 @@
-import {BrowserWindow, Menu, app, dialog, ipcMain, systemPreferences} from 'electron';
+import {BrowserWindow, Menu, app, dialog, ipcMain, systemPreferences, globalShortcut } from 'electron';
 import fs from 'fs';
 import path from 'path';
 import {URL} from 'url';
@@ -8,6 +8,7 @@ import telemetry from './ScratchDesktopTelemetry';
 import MacOSMenu from './MacOSMenu';
 import log from '../common/log.js';
 import arduinoCompiler from './arduinoCompiler';
+
 
 // suppress deprecation warning; this will be the default in Electron 9
 app.allowRendererProcessReuse = true;
@@ -159,7 +160,8 @@ const createWindow = ({search = null, url = 'index.html', ...browserWindowOption
 
     webContents.session.setPermissionRequestHandler(handlePermissionRequest);
 
-    if (isDevelopment) {
+    if (isDevelopment) 
+    {
         webContents.openDevTools({mode: 'detach', activate: true});
     }
 
@@ -175,7 +177,7 @@ const createAboutWindow = () => {
         height: 400,
         parent: _windows.main,
         search: 'route=about',
-        title: 'About Scratch Desktop'
+        title: 'About WOBOT Scratch'
     });
     return window;
 };
@@ -192,7 +194,7 @@ const createMainWindow = () => {
     const window = createWindow({
         width: defaultSize.width,
         height: defaultSize.height,
-        title: 'Scratch Desktop'
+        title: 'WOBOT Scratch'
     });
     const webContents = window.webContents;
 
@@ -248,6 +250,10 @@ const createMainWindow = () => {
 
     window.once('ready-to-show', () => {
         window.show();
+        globalShortcut.register('F12', () => {
+            // Do stuff when Y and either Command/Control is pressed.
+            window.webContents.openDevTools({mode: 'detach', activate: true});
+          });
     });
 
     return window;

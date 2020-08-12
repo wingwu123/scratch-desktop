@@ -68,7 +68,17 @@ const makeConfig = function (options) {
         resolve: {
             cacheWithContext: false,
             symlinks: false
-        }
+        },
+        optimization: {
+            minimize: true,
+            minimizer: [
+                /*
+              new TerserPlugin({
+                sourceMap: true,
+              }),
+              */
+            ],
+        },
     };
 };
 
