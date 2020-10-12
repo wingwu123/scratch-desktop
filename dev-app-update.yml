@@ -1,0 +1,7 @@
+publishAutoUpdate: true
+provider: whalesbot
+url: 'https://oceanlevel.cn/app/version?appid=com.whalesbot.scratch'
+useMultipleRangeRequest: false
+updaterCacheDirName: scratch-desktop-updater
+publisherName:
+  - whalesbot

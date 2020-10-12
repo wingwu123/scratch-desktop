@@ -1,10 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-//import Rpc from '../compiler/rpc/rpc'
 import { app } from 'electron'
 import child_process from 'child_process';
 import { stderr } from 'process';
 import log from '../common/log'
+import Port from './port'
 
 /**
  * 
@@ -50,6 +50,7 @@ class ArduinoCompiler{
         this.libraries = path.resolve(this.appPath, 'Arduino/libraries/');
 
         this.compiler_path = path.resolve(this.appPath, 'Arduino/arduino-cli.exe');
+        this.options = {cwd:path.resolve(this.appPath, 'Arduino/Arduino15')};
 
         log.log('compiler_path ', this.compiler_path);
     }
@@ -60,9 +61,15 @@ class ArduinoCompiler{
 
     //arduino-cli board list --timeout 10s
     boardList(){
+        return Port.list();
+        /*
         return new Promise((resolve, reject) => {
 
-            child_process.execFile(this.compiler_path, ['board', 'list', '--format', 'json', '--timeout', '10s'], (err, stdout, stderr) => {
+            protocol.list().then()
+
+            console.log("boardList compiler_path ", this.compiler_path);
+
+            child_process.execFile(this.compiler_path, ['board', 'list', '--format', 'json', '--timeout', '10s'], this.options, (err, stdout, stderr) => {
                 if(!err){
                     if(stderr){
                         reject(stderr);
@@ -71,8 +78,8 @@ class ArduinoCompiler{
 
                     let json = JSON.parse(stdout);
                     if(json && json.length > 0){
-                        this.port = json[0].address;
-                        resolve();
+                        let ports = json.map((value) => value.address);
+                        resolve(ports);
                     }
                     else{
                         reject('');
@@ -83,6 +90,7 @@ class ArduinoCompiler{
                 }
             });
         });
+        */
     }
 
     saveCode(code){
@@ -103,7 +111,8 @@ class ArduinoCompiler{
     compile(){
         return new Promise((resolve, reject) => {
             let sketch_path = path.resolve(this.libraries, 'WhalesbotApp');
-            child_process.execFile(this.compiler_path, ['compile', '-b', 'arduino:avr:mega','--format','json','--libraries', this.libraries, sketch_path], (err, stdout, stderr) => {
+            let build_cache_path = path.resolve(sketch_path, 'build_cache');
+            child_process.execFile(this.compiler_path, ['compile', '-b', 'arduino:avr:mega','--format','json','--libraries', this.libraries, '--build-cache-path', build_cache_path , sketch_path], this.options, (err, stdout, stderr) => {
                 if(!err){
                     if(stderr){
                         reject(stderr);
@@ -122,7 +131,7 @@ class ArduinoCompiler{
     upload(){
         return new Promise((resolve, reject) => {
             let sketch_path = path.resolve(this.libraries, 'WhalesbotApp');
-            child_process.execFile(this.compiler_path, ['upload', '-b', 'arduino:avr:mega','--format','json','-p',this.port, sketch_path], (err, stdout, stderr) => {
+            child_process.execFile(this.compiler_path, ['upload', '-b', 'arduino:avr:mega','--format','json','-p',this.port, sketch_path], this.options, (err, stdout, stderr) => {
                 if(!err){
                     if(stderr){
                         reject(stderr);

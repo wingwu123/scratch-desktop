@@ -34,7 +34,7 @@ const makeConfig = function (options) {
     }
 
     return {
-        devtool: 'cheap-module-eval-source-map',
+        devtool: false, //'cheap-module-eval-source-map',
         mode: isProduction ? 'production' : 'development',
         module: {
             rules: [
@@ -52,12 +52,12 @@ const makeConfig = function (options) {
                     include: options.babelPaths,
                     loader: 'babel-loader',
                     options: babelOptions
-                },
+                }/*,
                 {
                     test: sourceFileTest,
                     loader: 'source-map-loader',
                     enforce: 'pre'
-                }
+                }*/
             ]
         },
         plugins: [

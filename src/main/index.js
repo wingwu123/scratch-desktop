@@ -8,12 +8,33 @@ import telemetry from './ScratchDesktopTelemetry';
 import MacOSMenu from './MacOSMenu';
 import log from '../common/log.js';
 import arduinoCompiler from './arduinoCompiler';
+import port from './port';
+import Buffer from 'buffer';
 
+import serviceMgr from './services/services-mgr';
+import serviceAppState from './services/service-appstate';
+
+
+(function rewriteAppPath(){
+    const pathName = 'userData';
+    const appPath = app.getPath(pathName);
+    app.setPath(pathName, path.join(path.dirname(appPath), "Wobot"));
+    
+    console.info(pathName, app.getPath(pathName));
+})();
 
 // suppress deprecation warning; this will be the default in Electron 9
 app.allowRendererProcessReuse = true;
 
 app.arduinoCompiler = arduinoCompiler;
+
+app.fs = fs;
+app.path = path;
+app.root_path = path.resolve('./');
+app.port = port;
+
+
+serviceMgr.install();
 
 telemetry.appWasOpened();
 
@@ -234,15 +255,11 @@ const createMainWindow = () => {
     });
 
     webContents.on('will-prevent-unload', ev => {
-        const choice = dialog.showMessageBoxSync(window, {
-            type: 'question',
-            message: 'Leave Scratch?',
-            detail: 'Any unsaved changes will be lost.',
-            buttons: ['Stay', 'Leave'],
-            cancelId: 0, // closing the dialog means "stay"
-            defaultId: 0 // pressing enter or space without explicitly selecting something means "stay"
-        });
+
+        const choice = serviceAppState.willPreventUnload(window);
+
         const shouldQuit = (choice === 1);
+
         if (shouldQuit) {
             ev.preventDefault();
         }
@@ -273,6 +290,9 @@ app.on('window-all-closed', () => {
 });
 
 app.on('will-quit', () => {
+
+    serviceMgr.uninstall();
+
     telemetry.appWillClose();
 });
 
@@ -312,14 +332,24 @@ app.on('ready', () => {
     _windows.main = createMainWindow();
     _windows.main.on('closed', () => {
         delete _windows.main;
+        port.disconnect();
     });
+    /*
     _windows.about = createAboutWindow();
     _windows.about.on('close', event => {
         event.preventDefault();
         _windows.about.hide();
     });
+    */
 });
 
+/*
 ipcMain.on('open-about-window', () => {
     _windows.about.show();
+});
+*/
+
+ipcMain.on('save-confirm', (event, options) => {
+    let ret = dialog.showMessageBoxSync(_windows.main, {type: 'question', title: _windows.main.getTitle(), message: options.message, buttons:["确定","取消"], cancelId:1,defaultId:0});
+    event.reply('ipc-response', {result: ret, callback:options.callback});
 });

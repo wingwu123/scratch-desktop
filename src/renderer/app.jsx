@@ -9,9 +9,31 @@ import ElectronStorageHelper from '../common/ElectronStorageHelper';
 
 import styles from './app.css';
 
+import {v1 as UUIDv1} from 'uuid';
+
 import "react-monaco-editor";
 
-const arduinoCompiler = require('electron').remote.app.arduinoCompiler;
+import serviceFactory from './broker/ServiceFactory.js';
+
+const app = require('electron').remote.app;
+
+const electron = {
+    compiler:app.arduinoCompiler,
+    port:app.port,
+    fs:app.fs,
+    path:app.path,
+    root_path:app.root_path
+};
+
+function electron_properties_paint(){
+    console.info("electron.fs", electron.fs);
+    console.info("electron.path", electron.path);
+    console.info("electron.root_path", electron.root_path);
+}
+
+electron_properties_paint();
+
+
 
 const defaultProjectId = 0;
 
@@ -40,20 +62,49 @@ const ScratchDesktopHOC = function (WrappedComponent) {
                 'handleStorageInit',
                 'handleTelemetryModalOptIn',
                 'handleTelemetryModalOptOut',
-                'handleUpdateProjectTitle'
+                'handleUpdateProjectTitle',
+                'ipcResponse',
+                'ipcRequest',
+                'handleSaveConfirm'
             ]);
             this.state = {
                 projectTitle: null
             };
+            ipcRenderer.callbacks = {};
         }
+
+        ipcRequest(message, options){
+            if(!!options.callback)
+            {
+                let cbId = UUIDv1();
+                ipcRenderer.callbacks[cbId] = options.callback;
+                options.callback = cbId;
+            }
+            ipcRenderer.send(message, options);
+        }
+
+        ipcResponse(event, options) {
+            if(!!options.callback && ipcRenderer.callbacks[options.callback])
+            {
+                let handle = ipcRenderer.callbacks[options.callback];
+                delete ipcRenderer.callbacks[options.callback];
+                handle(options);
+            }
+        }
+
         componentDidMount () {
             ipcRenderer.on('setTitleFromSave', this.handleSetTitleFromSave);
+            ipcRenderer.on('ipc-response', this.ipcResponse);
         }
         componentWillUnmount () {
             ipcRenderer.removeListener('setTitleFromSave', this.handleSetTitleFromSave);
+            ipcRenderer.removeListener('ipc-response', this.ipcResponse);
         }
         handleClickLogo () {
             ipcRenderer.send('open-about-window');
+        }
+        handleSaveConfirm (options) {
+            this.ipcRequest('save-confirm', options);
         }
         handleProjectTelemetryEvent (event, metadata) {
             ipcRenderer.send(event, metadata);
@@ -81,13 +132,17 @@ const ScratchDesktopHOC = function (WrappedComponent) {
                 projectId={defaultProjectId}
                 projectTitle={this.state.projectTitle}
                 showTelemetryModal={shouldShowTelemetryModal}
-                onClickLogo={this.handleClickLogo}
+                /*
+                    onClickLogo={this.handleClickLogo}
+                */
+                
+                onSaveConfirm={this.handleSaveConfirm}
                 onProjectTelemetryEvent={this.handleProjectTelemetryEvent}
                 onStorageInit={this.handleStorageInit}
                 onTelemetryModalOptIn={this.handleTelemetryModalOptIn}
                 onTelemetryModalOptOut={this.handleTelemetryModalOptOut}
                 onUpdateProjectTitle={this.handleUpdateProjectTitle}
-                compiler = {arduinoCompiler}
+                electron = {electron}
                 {...this.props}
             />);
         }

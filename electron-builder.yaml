@@ -45,8 +45,15 @@ win:
     - appx
     - nsis
   publisherName: whalesbot
-  signAndEditExecutable: false
+  signAndEditExecutable: true
   requestedExecutionLevel: "requireAdministrator"
+  publish:
+   - 
+     publishAutoUpdate: true
+     provider: whalesbot
+     url: https://oceanlevel.cn/app/version?appid=com.whalesbot.wobot
+     useMultipleRangeRequest: false
+
 appx:
   identityName: ScratchFoundation.ScratchDesktop
   publisherDisplayName: "Scratch Foundation"
@@ -55,3 +62,5 @@ nsis:
   oneClick: false # allow user to choose per-user or per-machine
   allowToChangeInstallationDirectory: true
   include: "./build/installer.nsh"
+
+

@@ -1,7 +1,9 @@
 import minilog from 'minilog';
 import fs from 'fs';
 minilog.enable();
-minilog.pipe(fs.createWriteStream('./scratch-log.log', { flags: 'a' }));
+const file = './scratch-log.log';
+//const file = 'G:/scratch-log.log';
+minilog.pipe(fs.createWriteStream(file /* './scratch-log.log'*/, { flags: 'w' }));
 
 const namespace = (() => {
     switch (process.type) {

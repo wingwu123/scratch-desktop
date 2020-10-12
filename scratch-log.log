@@ -1,6 +1,10 @@
 app-main debug getAppPath  G:\projects\scratch30\scratch-desktop\dist\main
 app-main debug getAppPath new  G:\projects\scratch30\scratch-desktop
 app-main debug compiler_path  G:\projects\scratch30\scratch-desktop\Arduino\arduino-cli.exe
-app-main debug getAppPath  G:\projects\scratch30\scratch-desktop\dist\main
-app-main debug getAppPath new  G:\projects\scratch30\scratch-desktop
-app-main debug compiler_path  G:\projects\scratch30\scratch-desktop\Arduino\arduino-cli.exe
+app-main info log running
+app-main info Checking for update
+app-main info isUpdateAvailable {"version":"2.1.14","files":[{"url":"https://oceanlevel-1258570234.file.myqcloud.com/app_update/whalesbot_scratch%28std%29_v2.1.14_20200722.exe?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDdDqKhyxpRrnR3pwWbYP57HK7iAaCiDc4%26q-sign-time%3D1602464464%3B1602465124%26q-key-time%3D1602464464%3B1602465124%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3Dd8f802fb7666541fb7eb38402fc66346f7427b85","sha512":""}],"path":"","sha512":"","releaseDate":""} 
+app-main info Found version 2.1.14 (url: https://oceanlevel-1258570234.file.myqcloud.com/app_update/whalesbot_scratch%28std%29_v2.1.14_20200722.exe?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDdDqKhyxpRrnR3pwWbYP57HK7iAaCiDc4%26q-sign-time%3D1602464464%3B1602465124%26q-key-time%3D1602464464%3B1602465124%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3Dd8f802fb7666541fb7eb38402fc66346f7427b85)
+app-main error Error installing dev extension: Error: net::ERR_CONNECTION_CLOSED
+app-main error Error installing dev extension: Error: net::ERR_CONNECTION_CLOSED
+app-main error Error installing dev extension: Error: net::ERR_CONNECTION_CLOSED

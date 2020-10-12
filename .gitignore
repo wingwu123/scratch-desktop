@@ -28,3 +28,7 @@ npm-*
 # generated translation files
 /translations
 /locale
+app-dest/
+Arduino/
+extraFiles/
+static-copy/

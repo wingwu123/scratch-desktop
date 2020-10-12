@@ -3,7 +3,7 @@
   "productName": "WOBOT Scratch",
   "description": "WOBOT from whalebot company",
   "author": "Scratch Foundation",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "BSD-3-Clause",
   "scripts": {
     "start": "electron-webpack dev --bail --display-error-details --env.minify=false",
@@ -14,17 +14,22 @@
     "fetch": "rimraf ./static/assets/ && mkdirp ./static/assets/ && node ./scripts/fetchMediaLibraryAssets.js",
     "build": "node ./scripts/electron-builder-wrapper.js",
     "dist": "npm run build-gui && npm run fetch && npm run compile -p && node ./scripts/electron-builder-wrapper.js",
-    "dist-nsis": "npm run dist -- -w nsis",
+    "dist2": "npm run build-gui && npm run compile -p && node ./scripts/electron-builder-wrapper.js",
+    "dist-nsis": "npm run dist2 -- -w nsis",
     "dist:dir": "npm run dist -- --dir -c.compression=store -c.mac.identity=null",
-    "pbjs": "pbjs -t json -p ./src/compiler/protobuf-msg/commands board.proto commands.proto common.proto compile.proto core.proto lib.proto upload.proto > ./src/compiler/rpc/commands.json",
-    "cp-arduino": "xcopy .\\Arduino .\\dist\\win-ia32-unpacked\\Arduino\\ /S /E /Y /Q",
-    "lint": "eslint --cache --color --ext .jsx,.js ."
+    "npm-link": "npm link scratch-gui && npm link electron-builder && npm link electron-updater && npm link app-builder-lib && npm link builder-util && npm link builder-util-runtime",
+    "lint": "eslint --cache --color --ext .jsx,.js .",
+    "postinstall": "electron-builder install-app-deps",
+    "electron-test": "electron ./script/electron-test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/LLK/scratch-desktop.git"
   },
   "dependencies": {
+    "@marklb/electron-ipc-proxy": "^2.1.0",
+    "electron-ipc-proxy": "^2.1.0",
+    "serialport": "^9.0.1",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
@@ -44,6 +49,7 @@
     "electron-builder": "^22.6.0",
     "electron-devtools-installer": "^3.0.0",
     "electron-notarize": "^0.3.0",
+    "electron-rebuild": "^2.0.3",
     "electron-store": "^5.1.1",
     "electron-webpack": "^2.8.2",
     "eslint": "^7.0.0",
